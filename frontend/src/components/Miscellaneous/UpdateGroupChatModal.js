@@ -6,7 +6,7 @@ import { ViewIcon } from '@chakra-ui/icons';
 import { ChatState } from '../../context/chatProvider';
 import axios from 'axios';
 
-const UpdateGroupChatModal = ({fetchAgain, setFetchAgain}) => {
+const UpdateGroupChatModal = ({fetchAgain, setFetchAgain, fetchMessages}) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const {user, setSelectedChat, selectedChat} = ChatState();
     const [groupChatName, setGroupChatName] = useState();
@@ -155,6 +155,7 @@ const UpdateGroupChatModal = ({fetchAgain, setFetchAgain}) => {
 
             userIn._id === user._id ? setSelectedChat() : setSelectedChat(data);
             setFetchAgain(!fetchAgain);
+            fetchMessages();
             setLoading(false);
         } 
         catch (error) {
